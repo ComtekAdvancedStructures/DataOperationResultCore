@@ -161,6 +161,15 @@ namespace Comtek.DataOperationResultCore
         {
             Model = obj;
         }
+
+        public void MergeDataOperationResult(DataOperationResult<T> otherResult)
+        {
+            Messages.AddRange(otherResult.Messages);
+            // If the current success is false, leave it like that
+            // otherwise update it from the other result
+            if (Success) Success = otherResult.Success;
+            Model = otherResult.Model;
+        }
     }
 
 }
